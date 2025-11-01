@@ -381,5 +381,10 @@ def main():
 
 
 if __name__ == '__main__':
-    threading.Thread(target=run_flask).start()
-    main()
+    # threading.Thread(target=run_flask).start()
+    # main()
+    threading.Thread(target=main).start()
+
+    # Run Flask on the main thread (Render requires a running web service)
+    run_flask()
+
