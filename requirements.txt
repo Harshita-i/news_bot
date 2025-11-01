@@ -1,7 +1,8 @@
-python-telegram-bot==20.7
+python-telegram-bot
 google-generativeai
 requests
 python-dotenv
 streamlit
 pandas
 matplotlib
+Flask

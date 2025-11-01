@@ -7,6 +7,7 @@ from telegram.helpers import escape_markdown
 from dotenv import load_dotenv
 from telegram.constants import ParseMode
 import threading
+from flask import Flask
 import sqlite3
 # import gradio as gr
 import re
@@ -343,6 +344,16 @@ async def trending_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         msg_lines.append(f"{i}. {topic} ({count} requests)")
     await context.bot.send_message(chat_id=update.effective_chat.id, text="\n".join(msg_lines))
 
+flask_app = Flask(__name__)
+
+@flask_app.route("/")
+def home():
+    return "✅ Telegram Bot is running!"
+
+def run_flask():
+    port = int(os.environ.get("PORT", 5000))
+    flask_app.run(host="0.0.0.0", port=port)
+
 
 
 # --- MAIN ---
@@ -370,4 +381,5 @@ def main():
 
 
 if __name__ == '__main__':
+    threading.Thread(target=run_flask).start()
     main()
