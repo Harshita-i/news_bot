@@ -383,8 +383,8 @@ def main():
 if __name__ == '__main__':
     # threading.Thread(target=run_flask).start()
     # main()
-    threading.Thread(target=main).start()
+    threading.Thread(target=run_flask, daemon=True).start()
 
-    # Run Flask on the main thread (Render requires a running web service)
-    run_flask()
+    # Start the Telegram bot in the main thread (required for signal handling)
+    main()
 
